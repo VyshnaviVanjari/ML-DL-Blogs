@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Deep Text Corrector | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Deep Text Corrector" />
+<meta name="author" content="Vyshnavi Vanjari" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html" />
+<meta property="og:url" content="https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:image" content="https://cetking.com/wp-content/uploads/2019/03/grammar-3-1024x461.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-31T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","url":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html","@type":"BlogPosting","headline":"Deep Text Corrector","dateModified":"2020-10-31T00:00:00-05:00","datePublished":"2020-10-31T00:00:00-05:00","author":{"@type":"Person","name":"Vyshnavi Vanjari"},"image":"https://cetking.com/wp-content/uploads/2019/03/grammar-3-1024x461.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/ML-DL-Blogs/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/ML-DL-Blogs/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/ML-DL-Blogs/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/ML-DL-Blogs/about/">About Me</a><a class="page-link" href="/ML-DL-Blogs/search/">Search</a><a class="page-link" href="/ML-DL-Blogs/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Deep Text Corrector</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-31T00:00:00-05:00" itemprop="datePublished">
+        Oct 31, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Vyshnavi Vanjari</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/ML-DL-Blogs/categories/#Deep Learning">Deep Learning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/ML-DL-Blogs/categories/#Attention">Attention</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/VyshnaviVanjari/ML-DL-Blogs/tree/master/_notebooks/2020-10-31-Deep-Text-Corrector.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/VyshnaviVanjari/ML-DL-Blogs/master?filepath=_notebooks%2F2020-10-31-Deep-Text-Corrector.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/VyshnaviVanjari/ML-DL-Blogs/blob/master/_notebooks/2020-10-31-Deep-Text-Corrector.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Contents">Contents </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#1.-Introduction">1. Introduction </a></li>
+<li class="toc-entry toc-h2"><a href="#2.-Data-Preparation">2. Data Preparation </a></li>
+<li class="toc-entry toc-h2"><a href="#3.-Approaches-to-the-Problem">3. Approaches to the Problem </a></li>
+<li class="toc-entry toc-h2"><a href="#4.-Evaluation-Metrices">4. Evaluation Metrices </a></li>
+<li class="toc-entry toc-h2"><a href="#5.-Modelling">5. Modelling </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing">i. Encoder Decoder Model with Teacher Forcing </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism">ii. Encoder-Decoder Model with Attention Mechanism </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#iii.-Transformers">iii. Transformers </a></li>
+<li class="toc-entry toc-h3"><a href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization">iv. Attention Mechanism with Transformer based tokenization </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#6.-Future-Work">6. Future Work </a></li>
+<li class="toc-entry toc-h2"><a href="#7.-References">7. References </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-10-31-Deep-Text-Corrector.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Contents">
+<a class="anchor" href="#Contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contents<a class="anchor-link" href="#Contents"> </a>
+</h1>
+<ol>
+<li>
+<p>Introduction</p>
+</li>
+<li>
+<p>Data Preparation</p>
+</li>
+<li>
+<p>Approaches to the Problem</p>
+</li>
+<li>
+<p>Evaluation Metrices</p>
+</li>
+<li>
+<p>Modelling</p>
+<ol>
+<li>Encoder-Decoder Model with Teacher Forcing</li>
+<li>Encoder-Decoder Model with Attention Mechanism</li>
+<li>Transformers</li>
+<li>Attention Mechanism with Transformer based tokenization</li>
+</ol>
+</li>
+<li>
+<p>Future Work</p>
+</li>
+<li>
+<p>References</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-Introduction">
+<a class="anchor" href="#1.-Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction<a class="anchor-link" href="#1.-Introduction"> </a>
+</h2>
+<ul>
+<li>This project aims to correct grammatical mistakes in a given English text.</li>
+<li>Grammatical errors are of different types, including errors in articles or determiners, prepositions, noun form, verb form, subject-verb agreement, pronouns, word choice, sentence structure, punctuation, capitalization, etc.</li>
+<li>
+<p>In this project, we aim to correct 16 types of grammatical errors.</p>
+<ol>
+<li>Verb Tense</li>
+<li>Subject-Verb agreement</li>
+<li>Missing Verb</li>
+<li>Article or Determiner</li>
+<li>Noun Number</li>
+<li>Noun Possessive</li>
+<li>Pronoun Reference</li>
+<li>Run-on Sentences, Comma Splices</li>
+<li>Adjective/Adverb order</li>
+<li>Linking words/Phrases</li>
+<li>Poor Citation</li>
+<li>Parallelism</li>
+<li>Improper Preposition Forms</li>
+<li>Word Contractions</li>
+<li>Capitalization</li>
+<li>Spelling</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>To achieve this, we train a Deep Learning Model which takes grammatically incorrect text as input and outputs grammatically corrected text.</li>
+<li>Sequence-to-Sequence models are capable of correcting grammatical errors.</li>
+<li>We try different models with different architectures starting from basic encoder-decoder models, encoder-decoder models with attention to Transformers.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Data-Preparation">
+<a class="anchor" href="#2.-Data-Preparation" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Data Preparation<a class="anchor-link" href="#2.-Data-Preparation"> </a>
+</h2>
+<ul>
+<li>Downloaded an English Novel which has grammatically correct text.<a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">[1]</a> </li>
+<li>Did some basic pre-processing. Removed contents, chapters' names, etc, to just have only paragraphs with text.</li>
+<li>Did sentence detection using SPACY by setting custom boundaries.<a href="https://realpython.com/natural-language-processing-spacy-python/">[2]</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is a small code snippet for setting custom boundaries.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Some of the sentences generated from above process have improper opening and closing quotes, braces. Corrected them to get linguistically meaningful units.</li>
+<li>Removed sentences having only one word.</li>
+<li>Once we got all the grammatically correct meaningful sentences, splitted the data into train, cv and test data.</li>
+<li>Introduced 16 different types of grammatical errors into the datasets.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is the code snippet for introducing 16 types of errors into the sentences.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>After introducing errors into the sentences, introuduced space between words and punctuations in the sentences as punctuations need to be considered as seperate tokens while tokenization. Eg: '<strong>I am good.</strong>' - '<strong>I am good .</strong>' (space between good and fullstop)</li>
+<li>With this, we get proper train, cv, test datas with grammatically incorrect input sentences and grammatically correct output sentences.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Complete Code for Pre-Processing and Introducting errors @ <a href="https://github.com/VyshnaviVanjari/Deep_Text_Corrector/blob/main/preprocessing_add_errors.ipynb">https://github.com/VyshnaviVanjari/Deep_Text_Corrector/blob/main/preprocessing_add_errors.ipynb</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Approaches-to-the-Problem">
+<a class="anchor" href="#3.-Approaches-to-the-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Approaches to the Problem<a class="anchor-link" href="#3.-Approaches-to-the-Problem"> </a>
+</h2>
+<ul>
+<li>Encoder-Decoder models using RNNs is one of the approaches to this problem. However, this has a disadvatange of having a fixed length context vector which is incapable of remembering long sentences. <a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">[3]</a>
+</li>
+<li>The attention mechanism helps to memorize long source sentences in neural machine translation. Rather than building a single context vector from the encoder's last hidden state, attention creates shortcuts between the context vector and the entire source input.<a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input">[4]</a>
+</li>
+<li>Attention mechanism is a very good approach to this problem but the only problem is with Out of Vocabulary(OOV) words. </li>
+<li>Transformers are a great solution to this. Transformer tokenizers provide sub-word tokenization, byte-pair encoding, etc., and so there will be no problem in tokenizing OOV words.<a href="https://huggingface.co/transformers/tokenizer_summary.html">[5]</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="4.-Evaluation-Metrices">
+<a class="anchor" href="#4.-Evaluation-Metrices" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Evaluation Metrices<a class="anchor-link" href="#4.-Evaluation-Metrices"> </a>
+</h2>
+<ul>
+<li>
+<p>Chosen F0.5 as the evaluation metric similar to that in  CoNLL-2014 shared task on grammatical error correction. F0.5 emphasizes precision twice as much as recall, while F1 weighs precision and recall equally. When a grammar checker is put into actual use, it is important that its proposed corrections are highly accurate in order to gain user acceptance. Neglecting to propose a correction is not as bad as proposing an erroneous correction.<a href="https://www.aclweb.org/anthology/W14-1701.pdf">[6]</a> <a href="https://machinelearningmastery.com/fbeta-measure-for-machine-learning/#:~:text=F%2DMeasure%20%3D%20(2%20*,)%20%2F%20(Precision%20%2B%20Recall)">[7]</a></p>
+<p>Precision = True Positives/(True Positives + False Positives)</p>
+<p>Recall = True Positives/(True Positives + False Negatives)</p>
+<p>F1-Score = (2 <em> Precision </em> Recall) / (Precision + Recall)</p>
+<p><strong>Fbeta = ((1 + beta^2) <em> Precision </em> Recall) / (beta^2 * Precision + Recall)</strong></p>
+<p><strong>F0.5-score (beta=0.5): More weight on precision, less weight on recall.</strong></p>
+</li>
+</ul>
+<ul>
+<li>During inference, reported BLEU scores, perplexity along with F0.5 score.<a href="https://machinelearningmastery.com/calculate-bleu-score-for-text-python/">[8]</a> <a href="https://en.wikipedia.org/wiki/Perplexity">[9]</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-Modelling">
+<a class="anchor" href="#5.-Modelling" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Modelling<a class="anchor-link" href="#5.-Modelling"> </a>
+</h2>
+<h3 id="i.-Encoder-Decoder-Model-with-Teacher-Forcing">
+<a class="anchor" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing" aria-hidden="true"><span class="octicon octicon-link"></span></a>i. Encoder Decoder Model with Teacher Forcing<a class="anchor-link" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing"> </a>
+</h3>
+<ul>
+<li>
+<p>Below figure shows an encoder decoder model with teacher forcing.</p>
+
+<pre><code>  Input: Harry say nothing.
+  Expected Output: Harry said nothing.</code></pre>
+</li>
+</ul>
+<p><img src="/ML-DL-Blogs/images/copied_from_nb/encoder_decoder_model.png" alt="encoder-decoder-model"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Data needs to be tokenized and embedded before sending to encoder and decoder.</li>
+<li>As we can see in the above figure, we send the input sentence(embedded one) to the encoder. Here encoder and decoders are RNNs like LSTMs. </li>
+<li>Encoder encodes the sentence and the last hidden state has all the sentence information.</li>
+<li>This last hidden state of encoder is sent as the initial state to the decoder.</li>
+<li>During training, we use teacher forcing technique to send inputs to the decoder.</li>
+<li>In teacher forcing, the input to the decoder at the next time step will be the actual expected output of the previous time step but not the predicted output. We can observe this in the above figure. At second time step, the predicted output is 'says'. Instead of this, we send the actual output 'said' as input in the next time step. In this way, the model can learn effectively.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is the code snippet for creating encoder-decoder model with teacher forcing.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>This model didn't predict well. </li>
+<li>The main disadvantage with encoder-decoder models is that the context vector(last hidden state of encoder) fails to remember long sentences as it has fixed length.</li>
+<li>Hence, we proceeded with attention mechanism.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="ii.-Encoder-Decoder-Model-with-Attention-Mechanism">
+<a class="anchor" href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism" aria-hidden="true"><span class="octicon octicon-link"></span></a>ii. Encoder-Decoder Model with Attention Mechanism<a class="anchor-link" href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism"> </a>
+</h4>
+<ul>
+<li>Below figure shows Attention Mechanism. This figure is from Lilian Weng's blog.<a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input">[4]</a>
+</li>
+</ul>
+<p><img src="/ML-DL-Blogs/images/copied_from_nb/attention.png" alt="Image of Attention"></p>
+<center><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html">Image Source</a></center>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Encoder is a bidirectional RNN(can also be unidirectional) and decoder is a unidirectional RNN.</li>
+<li>As done in basic encoder decoder model, we send input sentence to the encoder. We get forward and backward encoder hidden states at each timestep.</li>
+<li>We get final encoder states(hi) by concatenating the forward and backward states at each timestep.</li>
+<li>Input to the decoder at each timestep is the concatenation of expected output of previous time step and context vector. Decoder hidden state will be passed to the next time step.</li>
+<li>Unlike basic encoder-decoder models where context vector is calculated only once and of fixed length, in attention, we calculate context vector at every time step.</li>
+<li>Below are the equations to calculate context vector.
+  <img src="attention_equations.png" alt="attention_equations"><center><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html">Source For Equations</a></center>
+</li>
+</ul>
+<ul>
+<li>
+<p>Below is the explanation for calculating context vector.</p>
+<ol>
+<li>Initial hidden state of decoder, s0 is computed by taking tanh of encoder backward hidden state.</li>
+<li>First we assign scores to a pair of decoder and encoder hidden states based on how well they match. Lets consider s0 as the initial hidden state of decoder and h1 as the encoder hidden state at first time step. We assign a score for them using the score equation pointed above where va, Wa are weight matrices. Similarly, we assign scores to s0, h2(encoder hidden state at second time step) and so on. Finally, we get scores for the pairs: (s0,h1), (s0,h2),..,(s0,hn).</li>
+<li>
+<p>Attention weights define how much of each source hidden state should be considered for each output. We calculate attention weights by applying softmax to the scores. Let alpha denotes attention weight.</p>
+<ol>
+<li>
+<p>Lets calculate attention weights for the first time step at decoder.&lt;/br&gt;</p>
+<p>alpha 1,1 = softmax(score(s0,h1))&lt;/br&gt;</p>
+<p>alpha 1,2 = softmax(score(s0,h2))&lt;/br&gt;</p>
+<p>.......................................................&lt;/br&gt;</p>
+<p>alpha 1,n = softmax(score(s0,hn))&lt;/br&gt;</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Now we have all the attention weights for the first time step which define which inputs are most important for the output at this time step.</p>
+</li>
+<li>Now we can get context vector for the first time step by calculating dot product of above attention weights(alpha 1,1,alpha 1,2,...,alpha 1,n) and all encoder hidden states(h1,h2,...,hn). Context vector is the summation of hidden states of the input sequence weighted by alignment scores.</li>
+</ol>
+</li>
+<li>
+<p>In the similar way, we can calculate context vectors at each time step of the decoder.</p>
+</li>
+<li>As context vector has access to the entire input sequence at each time step, it can memorize long sequences and there are no worries of forgetting.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is the code snippet for creating encoder-decoder model with attention mechanism.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>This encoder-decoder model with attention mechanism performed so well in correcting grammatical errors when compared to basic encoder-decoder model.</li>
+<li>However, it can't predict OOV words and in test data we have many OOV words.</li>
+<li>Transformers are the best in predicting OOV words as the tranformer tokenizer uses sub-word tokenization or byte-pair encoding to tokenize the words.<a href="https://huggingface.co/transformers/tokenizer_summary.html">[10]</a> Hence, proceeded modelling with transformers.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="iii.-Transformers">
+<a class="anchor" href="#iii.-Transformers" aria-hidden="true"><span class="octicon octicon-link"></span></a>iii. Transformers<a class="anchor-link" href="#iii.-Transformers"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Transformers, especially BERT is one of the latest milestones in handling language based tasks.</li>
+<li>Hugging Face provides many libraries with pre-trained Transformer models.<a href="https://huggingface.co/transformers/">[11]</a>
+</li>
+<li>There are different transformer models like BERT, GPT, GPT2, Roberta, XLNet, etc,.</li>
+<li>Some transformer models have only encoder part and some have only decoders.</li>
+<li>Encoder and Decoders in Transformer models are different from those we have discussed above.</li>
+<li>Encoder part is composed of many encoder layers where each layer has self attention layer, feed forword layer.</li>
+<li>Decoder part is composed of many decoder layers where each layer has self attention layer, encoder-decoder-attention layer, and feed forward layer.</li>
+<li>These encoder and decoder parts are different for different transformer models. There are masked self-attention layers in some transformer models.</li>
+<li>
+<p>Here are great blogs written by Jay Alammar in which he clearly explained every part of the Transformer model.<a href="http://jalammar.github.io/illustrated-transformer/">[12]</a> <a href="http://jalammar.github.io/illustrated-bert/">[13]</a></p>
+<p><a href="http://jalammar.github.io/illustrated-transformer/">http://jalammar.github.io/illustrated-transformer/</a></p>
+<p><a href="http://jalammar.github.io/illustrated-bert/">http://jalammar.github.io/illustrated-bert/</a></p>
+</li>
+</ul>
+<ul>
+<li>Tried modelling with GPT2 Transformer and the model is good in correcting grammatical errors and also in predicting OOV words.</li>
+<li>However, this model is very large. It has huge parameters. Time complexity is high and also this is difficult to deploy.</li>
+<li>Hence, fell back to previous attention mechanism shown in section B and to handle OOV words used transformer based tokenization using pre-tranined tokenizers from hugging face library.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="iv.-Attention-Mechanism-with-Transformer-based-tokenization">
+<a class="anchor" href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization" aria-hidden="true"><span class="octicon octicon-link"></span></a>iv. Attention Mechanism with Transformer based tokenization<a class="anchor-link" href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Used GPT2 Tokenizer from Hugging Face library to tokenize the data.</li>
+<li>GPT2 Tokenizer uses byte-pair encoding for tokenization.<a href="https://huggingface.co/transformers/tokenizer_summary.html">[10]</a>
+</li>
+<li>GPT2 Tokenizer calculates Byte-pair encoding as shown below.<ol>
+<li>Count the frequency of each word in the training corpus. Now, we have each word and its corresponding frequency.</li>
+<li>Get the base vocabulary with all the characters from the words and then split the words by character.</li>
+<li>From all the splitted words, take each pair of symbols(characters) and get the most frequent pair and merge them.</li>
+<li>Form merge rules until we get the desired vocabulary size.</li>
+<li>As the base vocabulary contains almost all English alphabets, OOV words can be tokenized.</li>
+</ol>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is the code snippet to tokenize the data using GPT2Tokenizer.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Passed tokenized data as inputs to the attention model.</li>
+<li>This model is able to correct the grammatical erros well and also able to predict OOV words.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below picture shows the predicted sentences and BLEU scores during inference.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/ML-DL-Blogs/images/copied_from_nb/inference.png" alt="inference"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Final Result on Test Data:</strong></p>
+<ul>
+<li>F0.5 score = 0.67</li>
+<li>Perplexity = 35.48485</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Code for Training and Inference @ <a href="https://github.com/VyshnaviVanjari/Deep_Text_Corrector/blob/main/training_inference.ipynb">https://github.com/VyshnaviVanjari/Deep_Text_Corrector/blob/main/training_inference.ipynb</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Error Analysis:</strong></p>
+<p><strong>Errors model corrected properly:</strong></p>
+<ul>
+<li>Most of the spelling mistakes are properly corrected.</li>
+<li>Some errors have wrong verb tense as present tense. Verb past tense is properly predicted.</li>
+<li>Some articles were removed and for these errors, articles are correclty predicted.</li>
+<li>Some linking words were missing like if, in, at, from, for etc,. Some of these errors are corrected.</li>
+<li>Word contractions like 've, 't, 's, 'll, etc., were removed. Some of these errors are corrected.</li>
+<li>Full stop and comma were interchanged and some of these errors are corrected.</li>
+<li>Missing quotes are corrected.</li>
+</ul>
+<p><strong>Erros model failed to correct:</strong></p>
+<ul>
+<li>Some words are wrongly predicted.</li>
+<li>Some errors with combined punctuation and upper case lower case errors are not properly corrected.(eg. , yes --&gt; . Yes)</li>
+<li>Some linking words were missing and are not predicted.</li>
+<li>'in' is wrongly predicted as 'into' sometimes.</li>
+<li>Most of the verb forms are predicted properly but few verb forms are not predicted correctly.</li>
+<li>Some articles are not predicted properly.</li>
+<li>Some word contractions like 'd are predicted which are not necessary.</li>
+<li>There are some errors with plurals, and some of these are predicted as singulars.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.-Future-Work">
+<a class="anchor" href="#6.-Future-Work" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work<a class="anchor-link" href="#6.-Future-Work"> </a>
+</h2>
+<ul>
+<li>From the above analysis, we can observe that the model is able to correct different kind of errors and at the same time failed to correct same kind of errors. </li>
+<li>Almost all spelling mistakes are corrected properly and most of the verb forms are corrected properly. </li>
+<li>Some errors are not trained properly as these errors are few. </li>
+<li>With much more data and by applying these errors to large data, we can train and predict much more efficiently.</li>
+<li>Transformer modelling is a great approach to this problem. Using quantization, we can reduce the model parameters and can try to build the model efficiently.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="7.-References">
+<a class="anchor" href="#7.-References" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. References<a class="anchor-link" href="#7.-References"> </a>
+</h2>
+<ol>
+<li><a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html</a></li>
+<li><a href="https://realpython.com/natural-language-processing-spacy-python/">https://realpython.com/natural-language-processing-spacy-python/</a></li>
+<li><a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html</a></li>
+<li><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input">https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input</a></li>
+<li><a href="https://huggingface.co/transformers/tokenizer_summary.html">https://huggingface.co/transformers/tokenizer_summary.html</a></li>
+<li><a href="https://www.aclweb.org/anthology/W14-1701.pdf">https://www.aclweb.org/anthology/W14-1701.pdf</a></li>
+<li>
+<a href="https://machinelearningmastery.com/fbeta-measure-for-machine-learning/#:~:text=F%2DMeasure%20%3D%20(2%20*,)%20%2F%20(Precision%20%2B%20Recall">https://machinelearningmastery.com/fbeta-measure-for-machine-learning/#:~:text=F%2DMeasure%20%3D%20(2%20*,)%20%2F%20(Precision%20%2B%20Recall</a>)</li>
+<li><a href="https://machinelearningmastery.com/calculate-bleu-score-for-text-python/">https://machinelearningmastery.com/calculate-bleu-score-for-text-python/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Perplexity">https://en.wikipedia.org/wiki/Perplexity</a></li>
+<li><a href="https://huggingface.co/transformers/tokenizer_summary.html">https://huggingface.co/transformers/tokenizer_summary.html</a></li>
+<li><a href="https://huggingface.co/transformers/">https://huggingface.co/transformers/</a></li>
+<li><a href="http://jalammar.github.io/illustrated-transformer/">http://jalammar.github.io/illustrated-transformer/</a></li>
+<li><a href="http://jalammar.github.io/illustrated-bert/">http://jalammar.github.io/illustrated-bert/</a></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Thanks for Reading😃</strong></p>
+<p><strong>Complete code in github: <a href="https://github.com/VyshnaviVanjari/Deep_Text_Corrector">https://github.com/VyshnaviVanjari/Deep_Text_Corrector</a></strong></p>
+<p><strong>Reach me at Linkedin: <a href="https://www.linkedin.com/in/vyshnavi-vanjari-57345896/">https://www.linkedin.com/in/vyshnavi-vanjari-57345896/</a></strong></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="VyshnaviVanjari/ML-DL-Blogs"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/ML-DL-Blogs/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/ML-DL-Blogs/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
