@@ -762,16 +762,13 @@ window.onload = wrap_img;
 <p>.......................................................</p>
 <p>alpha 1,n = softmax(score(s0,hn))</p>
 </li>
+<li>Now we have all the attention weights for the first time step which define which inputs are most important for the output at this time step.</li>
+<li>Now we can get context vector for the first time step by calculating dot product of above attention weights(alpha 1,1,alpha 1,2,...,alpha 1,n) and all encoder hidden states(h1,h2,...,hn). Context vector is the summation of hidden states of the input sequence weighted by alignment scores.</li>
 </ol>
 </li>
-</ul>
-
-<pre><code>4. Now we have all the attention weights for the first time step which define which inputs are most important for the output at this time step.
-5. Now we can get context vector for the first time step by calculating dot product of above attention weights(alpha 1,1,alpha 1,2,...,alpha 1,n) and all encoder hidden states(h1,h2,...,hn). Context vector is the summation of hidden states of the input sequence weighted by alignment scores.
-
-</code></pre>
-<ul>
-<li>In the similar way, we can calculate context vectors at each time step of the decoder.</li>
+<li>
+<p>In the similar way, we can calculate context vectors at each time step of the decoder.</p>
+</li>
 <li>As context vector has access to the entire input sequence at each time step, it can memorize long sequences and there are no worries of forgetting.</li>
 </ul>
 
