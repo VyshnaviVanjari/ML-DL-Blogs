@@ -119,7 +119,7 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents"> </a></h2><ol>
+<h1 id="Contents">Contents<a class="anchor-link" href="#Contents"> </a></h1><ol>
 <li><p>Introduction</p>
 </li>
 <li><p>Data Preparation</p>
@@ -147,7 +147,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Introduction">1. Introduction<a class="anchor-link" href="#1.-Introduction"> </a></h3><ul>
+<h2 id="1.-Introduction">1. Introduction<a class="anchor-link" href="#1.-Introduction"> </a></h2><ul>
 <li>This project aims to correct grammatical mistakes in a given English text.</li>
 <li>Grammatical errors are of different types, including errors in articles or determiners, prepositions, noun form, verb form, subject-verb agreement, pronouns, word choice, sentence structure, punctuation, capitalization, etc.</li>
 <li><p>In this project, we aim to correct 16 types of grammatical errors.</p>
@@ -182,7 +182,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Data-Preparation">2. Data Preparation<a class="anchor-link" href="#2.-Data-Preparation"> </a></h3><ul>
+<h2 id="2.-Data-Preparation">2. Data Preparation<a class="anchor-link" href="#2.-Data-Preparation"> </a></h2><ul>
 <li>Downloaded an English Novel which has grammatically correct text.<a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">[1]</a> </li>
 <li>Did some basic pre-processing. Removed contents, chapters' names, etc, to just have only paragraphs with text.</li>
 <li>Did sentence detection using SPACY by setting custom boundaries.<a href="https://realpython.com/natural-language-processing-spacy-python/">[2]</a></li>
@@ -542,7 +542,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Approaches-to-the-Problem">3. Approaches to the Problem<a class="anchor-link" href="#3.-Approaches-to-the-Problem"> </a></h3><ul>
+<h2 id="3.-Approaches-to-the-Problem">3. Approaches to the Problem<a class="anchor-link" href="#3.-Approaches-to-the-Problem"> </a></h2><ul>
 <li>Encoder-Decoder models using RNNs is one of the approaches to this problem. However, this has a disadvatange of having a fixed length context vector which is incapable of remembering long sentences. <a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">[3]</a></li>
 <li>The attention mechanism helps to memorize long source sentences in neural machine translation. Rather than building a single context vector from the encoder's last hidden state, attention creates shortcuts between the context vector and the entire source input.<a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input">[4]</a></li>
 <li>Attention mechanism is a very good approach to this problem but the only problem is with Out of Vocabulary(OOV) words. </li>
@@ -554,7 +554,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Evaluation-Metrices">4. Evaluation Metrices<a class="anchor-link" href="#4.-Evaluation-Metrices"> </a></h3><ul>
+<h2 id="4.-Evaluation-Metrices">4. Evaluation Metrices<a class="anchor-link" href="#4.-Evaluation-Metrices"> </a></h2><ul>
 <li><p>Chosen F0.5 as the evaluation metric similar to that in  CoNLL-2014 shared task on grammatical error correction. F0.5 emphasizes precision twice as much as recall, while F1 weighs precision and recall equally. When a grammar checker is put into actual use, it is important that its proposed corrections are highly accurate in order to gain user acceptance. Neglecting to propose a correction is not as bad as proposing an erroneous correction.<a href="https://www.aclweb.org/anthology/W14-1701.pdf">[6]</a> <a href="https://machinelearningmastery.com/fbeta-measure-for-machine-learning/#:~:text=F%2DMeasure%20%3D%20(2%20*,)%20%2F%20(Precision%20%2B%20Recall)">[7]</a></p>
 <p>Precision = True Positives/(True Positives + False Positives)</p>
 <p>Recall = True Positives/(True Positives + False Negatives)</p>
@@ -572,7 +572,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Modelling">5. Modelling<a class="anchor-link" href="#5.-Modelling"> </a></h3><h3 id="i.-Encoder-Decoder-Model-with-Teacher-Forcing">i. Encoder Decoder Model with Teacher Forcing<a class="anchor-link" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing"> </a></h3><ul>
+<h2 id="5.-Modelling">5. Modelling<a class="anchor-link" href="#5.-Modelling"> </a></h2><h3 id="i.-Encoder-Decoder-Model-with-Teacher-Forcing">i. Encoder Decoder Model with Teacher Forcing<a class="anchor-link" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing"> </a></h3><ul>
 <li><p>Below figure shows an encoder decoder model with teacher forcing.</p>
 
 <pre><code>  Input: Harry say nothing.
@@ -977,7 +977,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Future-Work">6. Future Work<a class="anchor-link" href="#6.-Future-Work"> </a></h3><ul>
+<h2 id="6.-Future-Work">6. Future Work<a class="anchor-link" href="#6.-Future-Work"> </a></h2><ul>
 <li>From the above analysis, we can observe that the model is able to correct different kind of errors and at the same time failed to correct same kind of errors. </li>
 <li>Almost all spelling mistakes are corrected properly and most of the verb forms are corrected properly. </li>
 <li>Some errors are not trained properly as these errors are few. </li>
@@ -990,7 +990,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="7.-References">7. References<a class="anchor-link" href="#7.-References"> </a></h3><ol>
+<h2 id="7.-References">7. References<a class="anchor-link" href="#7.-References"> </a></h2><ol>
 <li><a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html</a></li>
 <li><a href="https://realpython.com/natural-language-processing-spacy-python/">https://realpython.com/natural-language-processing-spacy-python/</a></li>
 <li><a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html</a></li>
