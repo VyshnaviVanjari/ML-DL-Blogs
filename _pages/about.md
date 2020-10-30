@@ -4,8 +4,6 @@ title: About Me
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+I am a Machine Learning Student at AAIC. Had more than one and half years of experience on Secure Boot Testing at Qualcomm.
+Check my profile @ [Linkedin](https://www.linkedin.com/in/vyshnavi-vanjari-57345896/) and [Github](https://github.com/VyshnaviVanjari)
