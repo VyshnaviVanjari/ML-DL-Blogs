@@ -14,11 +14,11 @@
 <link rel="canonical" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html" />
 <meta property="og:url" content="https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html" />
 <meta property="og:site_name" content="fastpages" />
-<meta property="og:image" content="https://vyshnavivanjari.github.io/ML-DL-Blogs/images/grammar/grammar.png" />
+<meta property="og:image" content="https://blog.cengage.com/wp-content/uploads/2020/07/How-to-improve-grammar.jpg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-10-31T00:00:00-05:00" />
 <script type="application/ld+json">
-{"url":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html","@type":"BlogPosting","headline":"Deep Text Corrector","dateModified":"2020-10-31T00:00:00-05:00","datePublished":"2020-10-31T00:00:00-05:00","image":"https://vyshnavivanjari.github.io/ML-DL-Blogs/images/grammar/grammar.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html"},"author":{"@type":"Person","name":"Vyshnavi Vanjari"},"description":"Deep Learning Model for Grammatical Error Correction","@context":"https://schema.org"}</script>
+{"url":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html","@type":"BlogPosting","headline":"Deep Text Corrector","dateModified":"2020-10-31T00:00:00-05:00","datePublished":"2020-10-31T00:00:00-05:00","image":"https://blog.cengage.com/wp-content/uploads/2020/07/How-to-improve-grammar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://vyshnavivanjari.github.io/ML-DL-Blogs/deep%20learning/attention/2020/10/31/Deep-Text-Corrector.html"},"author":{"@type":"Person","name":"Vyshnavi Vanjari"},"description":"Deep Learning Model for Grammatical Error Correction","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/ML-DL-Blogs/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/ML-DL-Blogs/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -123,20 +123,20 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#1.-Introduction">1. Introduction </a></li>
-<li class="toc-entry toc-h2"><a href="#2.-Data-Preparation">2. Data Preparation </a></li>
-<li class="toc-entry toc-h2"><a href="#3.-Approaches-to-the-Problem">3. Approaches to the Problem </a></li>
-<li class="toc-entry toc-h2"><a href="#4.-Evaluation-Metrices">4. Evaluation Metrices </a></li>
-<li class="toc-entry toc-h2"><a href="#5.-Modelling">5. Modelling </a>
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a></li>
+<li class="toc-entry toc-h2"><a href="#Data-Preparation">Data Preparation </a></li>
+<li class="toc-entry toc-h2"><a href="#Approaches-to-the-Problem">Approaches to the Problem </a></li>
+<li class="toc-entry toc-h2"><a href="#Evaluation-Metrices">Evaluation Metrices </a></li>
+<li class="toc-entry toc-h2"><a href="#Modelling">Modelling </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing">i. Encoder Decoder Model with Teacher Forcing </a></li>
-<li class="toc-entry toc-h3"><a href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism">ii. Encoder-Decoder Model with Attention Mechanism </a></li>
-<li class="toc-entry toc-h3"><a href="#iii.-Transformers">iii. Transformers </a></li>
-<li class="toc-entry toc-h3"><a href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization">iv. Attention Mechanism with Transformer based tokenization </a></li>
+<li class="toc-entry toc-h3"><a href="#Encoder-Decoder-Model-with-Teacher-Forcing">Encoder Decoder Model with Teacher Forcing </a></li>
+<li class="toc-entry toc-h3"><a href="#Encoder-Decoder-Model-with-Attention-Mechanism">Encoder-Decoder Model with Attention Mechanism </a></li>
+<li class="toc-entry toc-h3"><a href="#Transformers">Transformers </a></li>
+<li class="toc-entry toc-h3"><a href="#Attention-Mechanism-with-Transformer-based-tokenization">Attention Mechanism with Transformer based tokenization </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#6.-Future-Work">6. Future Work </a></li>
-<li class="toc-entry toc-h2"><a href="#7.-References">7. References </a></li>
+<li class="toc-entry toc-h2"><a href="#Future-Work">Future Work </a></li>
+<li class="toc-entry toc-h2"><a href="#References">References </a></li>
 </ul><!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
@@ -149,8 +149,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Introduction">
-<a class="anchor" href="#1.-Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Introduction<a class="anchor-link" href="#1.-Introduction"> </a>
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h2>
 <ul>
 <li>This project aims to correct grammatical mistakes in a given English text.</li>
@@ -189,8 +189,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Data-Preparation">
-<a class="anchor" href="#2.-Data-Preparation" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Data Preparation<a class="anchor-link" href="#2.-Data-Preparation"> </a>
+<h2 id="Data-Preparation">
+<a class="anchor" href="#Data-Preparation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preparation<a class="anchor-link" href="#Data-Preparation"> </a>
 </h2>
 <ul>
 <li>Downloaded an English Novel which has grammatically correct text.<a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">[1]</a> </li>
@@ -582,8 +582,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Approaches-to-the-Problem">
-<a class="anchor" href="#3.-Approaches-to-the-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Approaches to the Problem<a class="anchor-link" href="#3.-Approaches-to-the-Problem"> </a>
+<h2 id="Approaches-to-the-Problem">
+<a class="anchor" href="#Approaches-to-the-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Approaches to the Problem<a class="anchor-link" href="#Approaches-to-the-Problem"> </a>
 </h2>
 <ul>
 <li>Encoder-Decoder models using RNNs is one of the approaches to this problem. However, this has a disadvatange of having a fixed length context vector which is incapable of remembering long sentences. <a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">[3]</a>
@@ -601,8 +601,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Evaluation-Metrices">
-<a class="anchor" href="#4.-Evaluation-Metrices" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Evaluation Metrices<a class="anchor-link" href="#4.-Evaluation-Metrices"> </a>
+<h2 id="Evaluation-Metrices">
+<a class="anchor" href="#Evaluation-Metrices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluation Metrices<a class="anchor-link" href="#Evaluation-Metrices"> </a>
 </h2>
 <ul>
 <li>
@@ -625,11 +625,11 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-Modelling">
-<a class="anchor" href="#5.-Modelling" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Modelling<a class="anchor-link" href="#5.-Modelling"> </a>
+<h2 id="Modelling">
+<a class="anchor" href="#Modelling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modelling<a class="anchor-link" href="#Modelling"> </a>
 </h2>
-<h3 id="i.-Encoder-Decoder-Model-with-Teacher-Forcing">
-<a class="anchor" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing" aria-hidden="true"><span class="octicon octicon-link"></span></a>i. Encoder Decoder Model with Teacher Forcing<a class="anchor-link" href="#i.-Encoder-Decoder-Model-with-Teacher-Forcing"> </a>
+<h3 id="Encoder-Decoder-Model-with-Teacher-Forcing">
+<a class="anchor" href="#Encoder-Decoder-Model-with-Teacher-Forcing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encoder Decoder Model with Teacher Forcing<a class="anchor-link" href="#Encoder-Decoder-Model-with-Teacher-Forcing"> </a>
 </h3>
 <ul>
 <li>
@@ -721,8 +721,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="ii.-Encoder-Decoder-Model-with-Attention-Mechanism">
-<a class="anchor" href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism" aria-hidden="true"><span class="octicon octicon-link"></span></a>ii. Encoder-Decoder Model with Attention Mechanism<a class="anchor-link" href="#ii.-Encoder-Decoder-Model-with-Attention-Mechanism"> </a>
+<h3 id="Encoder-Decoder-Model-with-Attention-Mechanism">
+<a class="anchor" href="#Encoder-Decoder-Model-with-Attention-Mechanism" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encoder-Decoder Model with Attention Mechanism<a class="anchor-link" href="#Encoder-Decoder-Model-with-Attention-Mechanism"> </a>
 </h3>
 <ul>
 <li>Below figure shows Attention Mechanism. This figure is from Lilian Weng's blog.<a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#:~:text=The%20attention%20mechanism%20was%20born%20to%20help%20memorize%20long%20source,and%20the%20entire%20source%20input">[4]</a>
@@ -902,8 +902,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="iii.-Transformers">
-<a class="anchor" href="#iii.-Transformers" aria-hidden="true"><span class="octicon octicon-link"></span></a>iii. Transformers<a class="anchor-link" href="#iii.-Transformers"> </a>
+<h3 id="Transformers">
+<a class="anchor" href="#Transformers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transformers<a class="anchor-link" href="#Transformers"> </a>
 </h3>
 </div>
 </div>
@@ -939,8 +939,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="iv.-Attention-Mechanism-with-Transformer-based-tokenization">
-<a class="anchor" href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization" aria-hidden="true"><span class="octicon octicon-link"></span></a>iv. Attention Mechanism with Transformer based tokenization<a class="anchor-link" href="#iv.-Attention-Mechanism-with-Transformer-based-tokenization"> </a>
+<h3 id="Attention-Mechanism-with-Transformer-based-tokenization">
+<a class="anchor" href="#Attention-Mechanism-with-Transformer-based-tokenization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attention Mechanism with Transformer based tokenization<a class="anchor-link" href="#Attention-Mechanism-with-Transformer-based-tokenization"> </a>
 </h3>
 </div>
 </div>
@@ -1082,8 +1082,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Future-Work">
-<a class="anchor" href="#6.-Future-Work" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Future Work<a class="anchor-link" href="#6.-Future-Work"> </a>
+<h2 id="Future-Work">
+<a class="anchor" href="#Future-Work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future Work<a class="anchor-link" href="#Future-Work"> </a>
 </h2>
 <ul>
 <li>From the above analysis, we can observe that the model is able to correct different kind of errors and at the same time failed to correct same kind of errors. </li>
@@ -1099,8 +1099,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-References">
-<a class="anchor" href="#7.-References" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. References<a class="anchor-link" href="#7.-References"> </a>
+<h2 id="References">
+<a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
 </h2>
 <ol>
 <li><a href="https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html">https://www.pdfdrive.com/harry-potter-the-complete-collection-e187542062.html</a></li>
