@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Hard Drive Failure Prediction | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Hard Drive Failure Prediction" />
+<meta name="author" content="Vyshnavi Vanjari" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Machine Learning for Hard Drive Failure Prediction" />
+<meta property="og:description" content="Machine Learning for Hard Drive Failure Prediction" />
+<link rel="canonical" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/machine%20learning/2020/10/31/Hard-Drive-Failure-Prediction.html" />
+<meta property="og:url" content="https://vyshnavivanjari.github.io/ML-DL-Blogs/machine%20learning/2020/10/31/Hard-Drive-Failure-Prediction.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:image" content="https://vyshnavivanjari.github.io/ML-DL-Blogs/images/hdd.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-31T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://vyshnavivanjari.github.io/ML-DL-Blogs/machine%20learning/2020/10/31/Hard-Drive-Failure-Prediction.html","@type":"BlogPosting","headline":"Hard Drive Failure Prediction","dateModified":"2020-10-31T00:00:00-05:00","datePublished":"2020-10-31T00:00:00-05:00","image":"https://vyshnavivanjari.github.io/ML-DL-Blogs/images/hdd.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://vyshnavivanjari.github.io/ML-DL-Blogs/machine%20learning/2020/10/31/Hard-Drive-Failure-Prediction.html"},"author":{"@type":"Person","name":"Vyshnavi Vanjari"},"description":"Machine Learning for Hard Drive Failure Prediction","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/ML-DL-Blogs/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://vyshnavivanjari.github.io/ML-DL-Blogs/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/ML-DL-Blogs/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/ML-DL-Blogs/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/ML-DL-Blogs/about/">About Me</a><a class="page-link" href="/ML-DL-Blogs/search/">Search</a><a class="page-link" href="/ML-DL-Blogs/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Hard Drive Failure Prediction</h1><p class="page-description">Machine Learning for Hard Drive Failure Prediction</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-31T00:00:00-05:00" itemprop="datePublished">
+        Oct 31, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Vyshnavi Vanjari</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      19 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/ML-DL-Blogs/categories/#Machine Learning">Machine Learning</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/VyshnaviVanjari/ML-DL-Blogs/tree/master/_notebooks/2020-10-31-Hard-Drive-Failure-Prediction.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/VyshnaviVanjari/ML-DL-Blogs/master?filepath=_notebooks%2F2020-10-31-Hard-Drive-Failure-Prediction.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/VyshnaviVanjari/ML-DL-Blogs/blob/master/_notebooks/2020-10-31-Hard-Drive-Failure-Prediction.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/ML-DL-Blogs/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Introduction-to-the-Business-Problem">Introduction to the Business Problem </a></li>
+<li class="toc-entry toc-h2"><a href="#Data-Extraction">Data Extraction </a></li>
+<li class="toc-entry toc-h2"><a href="#Existing-Approaches">Existing Approaches </a></li>
+<li class="toc-entry toc-h2"><a href="#Improvements-to-the-Exisiting-Approaches">Improvements to the Exisiting Approaches </a></li>
+<li class="toc-entry toc-h2"><a href="#Evaluation-Metrics">Evaluation Metrics </a></li>
+<li class="toc-entry toc-h2"><a href="#Exploratory-Data-Analysis">Exploratory Data Analysis </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-Failure">Univariate Analysis: Failure </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_5_raw">Univariate Analysis: smart_5_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_9_raw">Univariate Analysis: smart_9_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_187_raw">Univariate Analysis: smart_187_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_188_raw">Univariate Analysis: smart_188_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_193_raw">Univariate Analysis: smart_193_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_194_raw">Univariate Analysis: smart_194_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_197_raw">Univariate Analysis: smart_197_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_198_raw">Univariate Analysis: smart_198_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_241_raw">Univariate Analysis: smart_241_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Univariate-Analysis:-smart_242_raw">Univariate Analysis: smart_242_raw </a></li>
+<li class="toc-entry toc-h3"><a href="#Summary-of-Univariate-Analyses:">Summary of Univariate Analyses: </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Data-Preprocessing">Data Preprocessing </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Missing-Values">Missing Values </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Filling-Missing-Values-with-mean">Filling Missing Values with mean </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Computing-mean,-std,-min,-max-for-smart_parameters-row-wise">Computing mean, std, min, max for smart_parameters row-wise </a></li>
+<li class="toc-entry toc-h3"><a href="#Removing-negative-capacity-byte-values">Removing negative capacity byte values </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Feature-Engineering">Feature Engineering </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Rolling-Mean,-Standard-Deviation-for-SMART-parameters---window-15">Rolling Mean, Standard Deviation for SMART parameters - window 15 </a></li>
+<li class="toc-entry toc-h3"><a href="#Expanding-Mean-for-SMART-parameters">Expanding Mean for SMART parameters </a></li>
+<li class="toc-entry toc-h3"><a href="#Exponential-Smoothing">Exponential Smoothing </a></li>
+<li class="toc-entry toc-h3"><a href="#Change-Failure-status-by-backtracking">Change Failure status by backtracking </a></li>
+<li class="toc-entry toc-h3"><a href="#Train-Test-split,-Response-Coding-Categorical-Features-and-Upsampling-Minority-Class">Train-Test split, Response Coding Categorical Features and Upsampling Minority Class </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Modelling">Modelling </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Logistic-Regression">Logistic Regression </a></li>
+<li class="toc-entry toc-h3"><a href="#Support-Vector-Machine">Support Vector Machine </a></li>
+<li class="toc-entry toc-h3"><a href="#Random-Forest-Classifier">Random Forest Classifier </a></li>
+<li class="toc-entry toc-h3"><a href="#XGBClassifier">XGBClassifier </a></li>
+<li class="toc-entry toc-h3"><a href="#Naive-Bayes">Naive Bayes </a></li>
+<li class="toc-entry toc-h3"><a href="#XGBClassifier-with-top-50-important-features">XGBClassifier with top 50 important features </a></li>
+<li class="toc-entry toc-h3"><a href="#Ensemble-of-RandomForestClassifier-and-XGBClassifier-with-top-50-important-features">Ensemble of RandomForestClassifier and XGBClassifier with top 50 important features </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Comparision-of-Different-Models">Comparision of Different Models </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Summary:">Summary: </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Future-Work">Future Work </a></li>
+<li class="toc-entry toc-h2"><a href="#References">References </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-10-31-Hard-Drive-Failure-Prediction.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/54760460/94100169-8162eb00-fe4a-11ea-93eb-b5972127ca1d.png" alt="Hard Drive Failure"><br>
+    </p>
+<center><a href="https://vsbytes.com/">Image Source</a></center>
+<h2 id="Introduction-to-the-Business-Problem">
+<a class="anchor" href="#Introduction-to-the-Business-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction to the Business Problem<a class="anchor-link" href="#Introduction-to-the-Business-Problem"> </a>
+</h2>
+<ul>
+<li>Hard drives are essential parts of data storage. When a hard disk drive malfunctions and data can’t be accessed, it is called a Hard Disk Drive Failure.</li>
+<li>There are many reasons for the failure of a Hard Drive like high magnetic fields, exposure to heat, or any normal operation, data corruption, human error, power issues etc,.</li>
+<li>Failure of a hard drive can be immediate, progressive or limited. Data may be totally destroyed or partially destroyed or can be totally recovered.</li>
+<li>So predicting the failures can be helpful in data backup prior to failure and we can replace the drive with a good one without any loss of our data.</li>
+<li>A Hard drive failure prediction method called SMART(Self-Monitoring, Analysis and Reporting Technology) has been proposed to constantly monitor the drives to predict failures in order to reduce the risk of data loss.</li>
+<li>SMART attributes represent Hard Drive health statistics such as the number of scan errors, reallocation counts and probational counts of a Hard Drive.</li>
+<li>In this case study, we are using Backblaze Hard Drive Stats Q3 2019 to predict failures of Hard Drives.</li>
+<li>Backblaze provides the data containing information from different manufacturers and different models with all the SMART parameters.</li>
+<li>Using the data provided by Backblaze, we apply different machine learning algorithms to predict the failures.</li>
+</ul>
+<p>To pose the problem in a better way, we can say that we need to predict if a hard drive is going to fail in the next 'N' days('N' is optimal value). If we can predict failure before 'N' days, we get sufficient time to retrieve the data and can replace that with a new drive.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-Extraction">
+<a class="anchor" href="#Data-Extraction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Extraction<a class="anchor-link" href="#Data-Extraction"> </a>
+</h2>
+<p>The Backblaze data center takes a snapshot of each operational hard drive everyday. The snapshot includes basic drive information along with the SMART statistics reported by the drive. All drives' snapshots for a given day are collected into a file consisting of a row for each active hard drive. The format of this file is 'csv'(Comma Separated Values). Each day this file is named in the format YYYY-MM-DD.csv, for example, 2019-08-01.csv.</p>
+<p>The columns of the file are as follows:</p>
+<ul>
+<li>Date – The date of the file in yyyy-mm-dd format. </li>
+<li>Serial Number – The manufacturer-assigned serial number of the drive. </li>
+<li>Model – The manufacturer-assigned model number of the drive. </li>
+<li>Capacity – The drive capacity in bytes. </li>
+<li>Failure – Contains a '0' if the drive is OK. Contains a '1' if this is the last day the drive was operational before failing.</li>
+<li>SMART Parameters</li>
+</ul>
+<p>We can download data from Backblaze website:
+<a href="https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data">https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Existing-Approaches">
+<a class="anchor" href="#Existing-Approaches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Existing Approaches<a class="anchor-link" href="#Existing-Approaches"> </a>
+</h2>
+<p>Research Paper: <a href="https://hal.archives-ouvertes.fr/hal-01703140/document">https://hal.archives-ouvertes.fr/hal-01703140/document</a></p>
+<ul>
+<li>In this research paper, machine learning algorithms were applied on the 2013 Backblaze dataset and all the models’ performances were compared. </li>
+<li>12 million samples from 47,793 drives including 31 models from 5 manufacturers were used. Of the 12 million samples, only 2586 samples have failure labels set to 1 and others are healthy samples which makes the dataset highly imbalanced. </li>
+<li>Defined a time window for failure which predicts whether the hard drive is going to fail in the next N days. </li>
+<li>Some SMART parameters were pre selected based on high correlation to failure events. SMART parameters - 5, 12, 187, 188, 189, 190, 198, 199, 200. </li>
+<li>To handle data imbalance, SMOTE technique was applied. </li>
+<li>Some failure samples share the exact same feature values as healthy samples leading to the impossibility to discriminate against them and so certain categories of failure samples were filtered.</li>
+<li>Logistic Regression, Support Vector Machine, Random Forest Classifier, Gradient Boosting Decision Trees - All these machine
+learning algorithms were applied on the final data. </li>
+<li>It was observed that RF and GBDT resulted in good precision and recall. </li>
+<li>RF provided best performances with 95% precision and 67% recall.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Improvements-to-the-Exisiting-Approaches">
+<a class="anchor" href="#Improvements-to-the-Exisiting-Approaches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Improvements to the Exisiting Approaches<a class="anchor-link" href="#Improvements-to-the-Exisiting-Approaches"> </a>
+</h2>
+<ul>
+<li>For every hard drive, SMART parameters are recorded everyday and these parameters are very important in predicting failures.</li>
+<li>We can extract time series features from these SMART parameters like rolling window features(mean, std), expanding window features(mean, std), exponential smoothing, lags, etc,.</li>
+<li>In the research paper, it was given that SMOTE technique used for data balancing didn't contributed much in predicting failures. Hence upsampling is used to balance the data.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Evaluation-Metrics">
+<a class="anchor" href="#Evaluation-Metrics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluation Metrics<a class="anchor-link" href="#Evaluation-Metrics"> </a>
+</h2>
+<ul>
+<li>
+<p>False alarm rate is a good choice for balanced datasets but, as operational datasets are extremely unbalanced in favour of working drives, even a low false alarm rate in the range of 1% could translate into poor performances. Therefore, we report precision, recall metrics and f1-score.</p>
+</li>
+<li>
+<p>False Alarm Ratio = False Alarms/Total number of alarms<br>
+i.e., False Alarm Ratio = (Number of drives wrongly detected as failures)/(Total number of actually failed drives)</p>
+</li>
+<li>
+<p>Precision = true positive/(true positive + false positive)<br>
+i.e., Precision = (Number of drives that are actually failures)/(Total number of drives that are predicted to be failures)</p>
+</li>
+<li>
+<p>Recall = true positive/(true positive + false negative)<br>
+i.e., Recall = (Number of drives predicted correctly as failures)/(Total number of drives that are actually failures)</p>
+</li>
+<li>
+<p>F1-Score = 2 <em> (Precision </em> Recall) / (Precision + Recall)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploratory-Data-Analysis">
+<a class="anchor" href="#Exploratory-Data-Analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exploratory Data Analysis<a class="anchor-link" href="#Exploratory-Data-Analysis"> </a>
+</h2>
+<p>Backblaze uses the following five SMART stats as a means to help determine if a drive is going to fail.</p>
+
+<pre><code>ATTRIBUTE       DESCRIPTION
+SMART 5         Reallocated Sectors Count
+SMART 187       Reported Uncorrectable Errors
+SMART 188       Command Timeout
+SMART 197       Current Pending Sector Count
+SMART 198       Uncorrectable Sector Count
+
+</code></pre>
+<p>Along with above features, we also selected other SMART features - SMART 5, 9, 12, 187, 188, 189, 190, 193, 194, 197, 198, 199, 200, 241, 242.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"july_august"</span><span class="o">+</span><span class="s2">"</span><span class="se">\\</span><span class="s2">"</span><span class="o">+</span><span class="n">listdir</span><span class="p">(</span><span class="s2">"july_august"</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="s2">"july_august"</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
+  <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"july_august"</span><span class="o">+</span><span class="s2">"</span><span class="se">\\</span><span class="s2">"</span><span class="o">+</span><span class="n">file</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Output:
+<img src="https://user-images.githubusercontent.com/54760460/94002334-64310c80-fdb7-11ea-9b9b-3b8b47492618.png" alt="image"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can observe, there are normalized features for SMART parameters.<br>
+But, we only select raw values. Also, due to limited computational power, we select only segate models' July and August months' data.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">'date'</span><span class="p">,</span><span class="s1">'model'</span><span class="p">,</span><span class="s1">'serial_number'</span><span class="p">,</span><span class="s1">'capacity_bytes'</span><span class="p">,</span> <span class="s1">'failure'</span><span class="p">,</span><span class="s1">'smart_5_raw'</span><span class="p">,</span><span class="s1">'smart_9_raw'</span><span class="p">,</span><span class="s1">'smart_12_raw'</span><span class="p">,</span><span class="s1">'smart_187_raw'</span><span class="p">,</span>
+             <span class="s1">'smart_188_raw'</span><span class="p">,</span><span class="s1">'smart_189_raw'</span><span class="p">,</span><span class="s1">'smart_190_raw'</span><span class="p">,</span><span class="s1">'smart_193_raw'</span><span class="p">,</span><span class="s1">'smart_194_raw'</span><span class="p">,</span><span class="s1">'smart_197_raw'</span><span class="p">,</span><span class="s1">'smart_198_raw'</span><span class="p">,</span>
+             <span class="s1">'smart_199_raw'</span><span class="p">,</span><span class="s1">'smart_200_raw'</span><span class="p">,</span><span class="s1">'smart_241_raw'</span><span class="p">,</span><span class="s1">'smart_242_raw'</span><span class="p">]</span>
+<span class="n">df_new</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">df_segate</span><span class="o">=</span><span class="n">df_new</span><span class="p">[</span><span class="n">df_new</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span><span class="o">==</span><span class="s1">'ST4000DM000'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">df_new</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="k">if</span> <span class="n">model</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>  <span class="o">==</span> <span class="s1">'ST'</span> <span class="ow">or</span> <span class="n">model</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Se'</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">row_df</span><span class="o">=</span><span class="n">df_new</span><span class="p">[</span><span class="n">df_new</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span><span class="o">==</span><span class="n">model</span><span class="p">]</span>
+        <span class="n">df_segate</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_segate</span><span class="p">,</span><span class="n">row_df</span><span class="p">])</span>
+<span class="n">df_segate</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-Failure">
+<a class="anchor" href="#Univariate-Analysis:-Failure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: Failure<a class="anchor-link" href="#Univariate-Analysis:-Failure"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">'darkgrid'</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of failure"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94002994-444e1880-fdb8-11ea-9c13-5952309bb68d.png" alt="image"></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">5053997</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    
+<span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">367</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>From the above plot, we can observe that the data set is highly imbalanced with only a few number of failures(failure=1)</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_5_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_5_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_5_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_5_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_5_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_5_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94003510-ee2da500-fdb8-11ea-8c8e-592397c561a1.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that most of the drives are working for different range values of smart_5_raw and most of failures occurred when smart_5_raw is below the range of 10000</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_5_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_5_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94003648-27661500-fdb9-11ea-802a-d66ec4b02aa3.png" alt="image"></p>
+<p><strong>From the above plots, we can observe that most of the failures(failure=1) occurred when smart_5_raw values are in the range of 0 to 10000 and few failures in the range of 20000 and one failure in the range of 70000</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_9_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_9_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_9_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_9_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_9_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_9_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94004052-b70bc380-fdb9-11ea-8d15-71dba6647e63.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_9_raw values in the range of 12000 to 29000. However, some failed drives also have smart_9_raw values in the range of 10000 to 18000</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_9_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_9_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94004148-de629080-fdb9-11ea-91ae-64c486340776.png" alt="image"></p>
+<p><strong>From the above plots, we can observe that most of the failures occurred when smart_9_raw is in the range of 10000 to 20000</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_187_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_187_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_187_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_187_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_187_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_187_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94004304-1bc71e00-fdba-11ea-8387-1dea99988bc0.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_187_raw values in different ranges and most of the failures when smart_187_raw value is 0</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_187_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_187_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94004378-3ac5b000-fdba-11ea-9a45-3a93447f05c5.png" alt="image"></p>
+<p><strong>From the above plots, we can observe that most of the failures occurred when smart_187_raw values are in the range of 0 to 1000 and only one failure occurred when the values are greater than 50000</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_188_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_188_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_188_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_188_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_188_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_188_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94006322-4a92c380-fdbd-11ea-9812-dc098e882a95.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_188_raw values in very high ranges of 1e11</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_193_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_193_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_193_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_193_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_193_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_193_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94007403-086a8180-fdbf-11ea-88b6-3bdf69391419.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_193_raw values in different ranges from 0 to 1400000</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_193_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_193_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94007467-21733280-fdbf-11ea-8ae6-326711e201cb.png" alt="image"></p>
+<p><strong>From the above plots and analysis, we can observe that most of the failures occurred when smart_193_raw is in the range of 0 to 10000 and few failures in the range of 10000 to 50000</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_194_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_194_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_194_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_194_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_194_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_194_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94008381-909d5680-fdc0-11ea-88c4-a7aacac79dfa.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that both working and failed drives have smart_194_raw values in almost same ranges from 25 to 35</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_194_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_194_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94008471-b4f93300-fdc0-11ea-9b76-56dfa2f0ace5.png" alt="image"></p>
+<p><strong>From the above plots, we can observe that most failures occurred when smart_194_raw values are in the range of 20 to 40</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_197_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_197_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_197_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_197_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_197_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_197_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94008770-29cc6d00-fdc1-11ea-9359-0271ab8cfb9c.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_197_raw values in the range of 0 to 3000 and also failed drives have same range of values</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_197_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_197_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94008922-5aaca200-fdc1-11ea-80fc-355a541b01cd.png" alt="image"></p>
+<p><strong>From the above plots, we can observe that all failures occurred when smart_197_raw values are in the range of 0 to 3000 and most failures occurred when the value is 0</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_198_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_198_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_198_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_198_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_198_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_198_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94009045-83cd3280-fdc1-11ea-8d37-b8a6b504425b.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_198_raw values in the range of 0 to 3000 and failed drives also have almost same range of values</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_198_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_198_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94009177-bd05a280-fdc1-11ea-974f-692287c30bd8.png" alt="image"></p>
+<p><strong>From above plot, we can observe that all the failures occurred when smart_198_raw values are in the range of 0 to 2500 and most failures occurred when the value is 0</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_241_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_241_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_241_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_241_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_241_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_241_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94009469-21286680-fdc2-11ea-930d-99bb6c0d8ccb.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_241_raw values in different ranges and have high values in the range of 1e11</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_241_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_241_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94009668-6b114c80-fdc2-11ea-834d-d3ac1855b57d.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that failures occurred when smart_241_raw values are in very high ranges of 0.5e11 to 0.6e11</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Univariate-Analysis:-smart_242_raw">
+<a class="anchor" href="#Univariate-Analysis:-smart_242_raw" aria-hidden="true"><span class="octicon octicon-link"></span></a>Univariate Analysis: smart_242_raw<a class="anchor-link" href="#Univariate-Analysis:-smart_242_raw"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'failure'</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">'smart_242_raw'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df_segate</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Box Plot to detect failure based on smart_242_raw"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94010455-96486b80-fdc3-11ea-9861-2230de7e32f1.png" alt="image"></p>
+<p><strong>From the above plot, we can observe that working drives have smart_242_raw values in different ranges of values from 0 to 2.5e13</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'smart_242_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribution Plot of smart_242_raw for failed drives"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94010707-ed4e4080-fdc3-11ea-90c9-3c2ca265983b.png" alt="image"></p>
+<p><strong>From the above plot and analysis, we can observe that most of the failures occurred when smart_242_raw values are in the range of 1.062508e+10 to 1.5e+11</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Summary-of-Univariate-Analyses:">
+<a class="anchor" href="#Summary-of-Univariate-Analyses:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of Univariate Analyses:<a class="anchor-link" href="#Summary-of-Univariate-Analyses:"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From all the above plots, we can observe that the failures occurred for different ranges of smart attributes' values.<br>
+Most failures occurred when smart attributes' values are 0.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-Preprocessing">
+<a class="anchor" href="#Data-Preprocessing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Preprocessing<a class="anchor-link" href="#Data-Preprocessing"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Missing-Values">
+<a class="anchor" href="#Missing-Values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Missing Values<a class="anchor-link" href="#Missing-Values"> </a>
+</h3>
+<p>We remove features which have missing values' percentage greater than 30.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">'''percentage of mssing values in each column'''</span>
+<span class="n">features_new_2</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df_segate</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">null_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">df_segate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">null_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">df_segate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">features_new_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">df_segate</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">features_new_2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>More than 25% of the values are missing in smart_189_raw, smart_200_raw. So dropping those columns</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Filling-Missing-Values-with-mean">
+<a class="anchor" href="#Filling-Missing-Values-with-mean" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filling Missing Values with mean<a class="anchor-link" href="#Filling-Missing-Values-with-mean"> </a>
+</h4>
+<p>We fill missing values in each column with their mean</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_5_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_5_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_5_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_9_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_9_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_9_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_12_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_12_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_12_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_187_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_187_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_187_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_188_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_188_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_188_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_190_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_190_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_190_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_193_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_193_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_193_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_194_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_194_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_194_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_197_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_197_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_197_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_198_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_198_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_198_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_199_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_199_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_199_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_241_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_241_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_241_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_242_raw'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_242_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'smart_242_raw'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Computing-mean,-std,-min,-max-for-smart_parameters-row-wise">
+<a class="anchor" href="#Computing-mean,-std,-min,-max-for-smart_parameters-row-wise" aria-hidden="true"><span class="octicon octicon-link"></span></a>Computing mean, std, min, max for smart_parameters row-wise<a class="anchor-link" href="#Computing-mean,-std,-min,-max-for-smart_parameters-row-wise"> </a>
+</h3>
+<p>We calculate Mean, Standard Deviation, Min, Max for SMART parameters row-wise and add them as new features.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'mean'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'std'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'min'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_segate</span><span class="p">[</span><span class="s1">'max'</span><span class="p">]</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Removing-negative-capacity-byte-values">
+<a class="anchor" href="#Removing-negative-capacity-byte-values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing negative capacity byte values<a class="anchor-link" href="#Removing-negative-capacity-byte-values"> </a>
+</h3>
+<p>We have observed that there are some negative values for capacity byte which are wrongly recorded. Hence dropping those rows.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp</span><span class="o">=</span><span class="n">df_segate</span><span class="p">[</span><span class="n">df_segate</span><span class="p">[</span><span class="s1">'capacity_bytes'</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="n">ind</span><span class="o">=</span><span class="n">temp</span><span class="o">.</span><span class="n">index</span>
+<span class="n">df_segate</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_segate</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">ind</span><span class="p">)],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Feature-Engineering">
+<a class="anchor" href="#Feature-Engineering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feature Engineering<a class="anchor-link" href="#Feature-Engineering"> </a>
+</h2>
+<p>Sort the DataFrame by serial_number and date to extract time series features.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_new</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'df_segate_july_august_no_backtrack.csv'</span><span class="p">)</span>
+<span class="n">df_new_with_lag</span><span class="o">=</span><span class="n">df_new</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">'serial_number'</span><span class="p">,</span><span class="s1">'date'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rolling-Mean,-Standard-Deviation-for-SMART-parameters---window-15">
+<a class="anchor" href="#Rolling-Mean,-Standard-Deviation-for-SMART-parameters---window-15" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rolling Mean, Standard Deviation for SMART parameters - window 15<a class="anchor-link" href="#Rolling-Mean,-Standard-Deviation-for-SMART-parameters---window-15"> </a>
+</h3>
+<p>We can write code using pd.DataFrame.shift function but we shouldn't do that directly for a column.<br> 
+We have different models with different serial numbers.<br> 
+For every unique serial number, we need to calculate rolling mean and standard deviation.<br>
+We can write code with shift function by looping over all the unique serial numbers but it takes a lot of time as there are many thousands of unique serial numbers.<br>
+Hence written code as pointed below.<br>
+Here we take window=15.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">serial_numbers</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">serial_number</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]):</span>
+    <span class="n">rolling_mean</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">rolling_stdev</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">values</span><span class="o">=</span><span class="p">[]</span> 
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">rolling_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+            <span class="n">rolling_stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">15</span><span class="p">):</span> 
+                <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">mean_</span><span class="o">=</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)])</span>
+                <span class="n">stdev_</span><span class="o">=</span><span class="n">stdev</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)])</span>
+                <span class="n">rolling_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_</span><span class="p">)</span>
+                <span class="n">rolling_stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stdev_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">mean_</span><span class="o">=</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">-</span><span class="mi">15</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)])</span>
+                <span class="n">stdev_</span><span class="o">=</span><span class="n">stdev</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">-</span><span class="mi">15</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)])</span>
+                <span class="n">rolling_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_</span><span class="p">)</span>
+                <span class="n">rolling_stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stdev_</span><span class="p">)</span>
+    <span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="o">+</span><span class="s1">'_rolling_mean'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rolling_mean</span>
+    <span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="o">+</span><span class="s1">'_rolling_stdev'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rolling_stdev</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Expanding-Mean-for-SMART-parameters">
+<a class="anchor" href="#Expanding-Mean-for-SMART-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Expanding Mean for SMART parameters<a class="anchor-link" href="#Expanding-Mean-for-SMART-parameters"> </a>
+</h3>
+<p>Below is the code snippet for extracting expanding mean features.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">serial_numbers</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">serial_number</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]):</span>
+    <span class="n">expanding_mean</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">expanding_stdev</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">values</span><span class="o">=</span><span class="p">[]</span> 
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">expanding_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+            <span class="n">expanding_stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">expanding_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+            <span class="n">expanding_stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stdev</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="o">+</span><span class="s1">'_expanding_mean'</span><span class="p">]</span> <span class="o">=</span> <span class="n">expanding_mean</span>
+    <span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="o">+</span><span class="s1">'_expanding_stdev'</span><span class="p">]</span> <span class="o">=</span> <span class="n">expanding_stdev</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exponential-Smoothing">
+<a class="anchor" href="#Exponential-Smoothing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exponential Smoothing<a class="anchor-link" href="#Exponential-Smoothing"> </a>
+</h3>
+<p>For exponential smoothing, we have considered alpha=0.15.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">serial_numbers</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">serial_number</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">18</span><span class="p">]):</span>
+    <span class="n">predicted_values</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">serial_numbers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">predicted_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">predicted_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predicted_value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">predicted_value</span> <span class="o">=</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="n">predicted_value</span><span class="p">)</span>
+            <span class="n">predicted_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predicted_value</span><span class="p">)</span>
+    <span class="n">df_new_with_lag</span><span class="p">[</span><span class="n">column</span><span class="o">+</span><span class="s1">'_exp_avg'</span><span class="p">]</span> <span class="o">=</span> <span class="n">predicted_values</span>
+<span class="n">df_new_with_lag</span><span class="o">=</span><span class="n">df_new_with_lag</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">'date'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Change-Failure-status-by-backtracking">
+<a class="anchor" href="#Change-Failure-status-by-backtracking" aria-hidden="true"><span class="octicon octicon-link"></span></a>Change Failure status by backtracking<a class="anchor-link" href="#Change-Failure-status-by-backtracking"> </a>
+</h3>
+<p>We need to predict whether a drive is going to fail in the next 'N' days. Here we take N=15.<br>
+For this, we backtrack last 15 days' failures, i.e., if we have a failed drive, we mark failure as '1' for its previous 15 days.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_segate_backtrack</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"df_segate.csv"</span><span class="p">)</span>
+<span class="n">new_date</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">df_segate_backtrack</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]:</span>
+    <span class="n">new_date</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+<span class="n">df_segate_backtrack</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span><span class="o">=</span><span class="n">new_date</span>
+
+<span class="n">failed</span><span class="o">=</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">serial_number</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">failed</span><span class="o">.</span><span class="n">serial_number</span><span class="p">):</span>
+    <span class="n">d</span><span class="o">=</span><span class="n">failed</span><span class="p">[</span><span class="n">failed</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">==</span><span class="n">serial_number</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">temp</span><span class="o">=</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="s1">'serial_number'</span><span class="p">]</span><span class="o">==</span><span class="n">serial_number</span><span class="p">]</span>
+    <span class="n">temp</span><span class="o">=</span><span class="n">temp</span><span class="p">[</span><span class="n">temp</span><span class="o">.</span><span class="n">date</span><span class="o">&gt;=</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">15</span><span class="p">))]</span>
+    <span class="n">temp</span><span class="o">=</span><span class="n">temp</span><span class="p">[</span><span class="n">temp</span><span class="o">.</span><span class="n">date</span><span class="o">&lt;</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">indices</span><span class="o">=</span><span class="n">temp</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">df_segate_backtrack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">failed</span><span class="o">=</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="n">df_segate_backtrack</span><span class="p">[</span><span class="s1">'failure'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-Test-split,-Response-Coding-Categorical-Features-and-Upsampling-Minority-Class">
+<a class="anchor" href="#Train-Test-split,-Response-Coding-Categorical-Features-and-Upsampling-Minority-Class" aria-hidden="true"><span class="octicon octicon-link"></span></a>Train-Test split, Response Coding Categorical Features and Upsampling Minority Class<a class="anchor-link" href="#Train-Test-split,-Response-Coding-Categorical-Features-and-Upsampling-Minority-Class"> </a>
+</h3>
+<p>After extracting the time series features and backtracking the failure status, we have splitted the data into train, cv, and test.<br>
+We have extracted features from Model ID and Serial Number and encoded them using response coding.<br>
+Below are the features extracted from Model ID and Serial Number:</p>
+<ul>
+<li>model_char_count - eg: Model ID = 'ST12000NM0007', model_char_count = 13</li>
+<li>model_second_last_char - eg: Model ID = 'ST12000NM0007', model_second_last_char = 'T7'</li>
+<li>serial_number_second_last_char - eg: Serial Number = 'ZJV2SP8Y', serial_number_second_last_char = 'JY'</li>
+</ul>
+<p>By response coding model_second_last_char and serial_number_second_last_char, we get working and failing probabilites for these features out of which we used working probabilites as features.</p>
+<p>Finally, to balance the data, we upsampled the minority class(drives with failure=1).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">failed_train_upsample_df</span><span class="o">=</span><span class="n">resample</span><span class="p">(</span><span class="n">failed_train_df</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                      <span class="n">n_samples</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">working_train_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                                      <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modelling">
+<a class="anchor" href="#Modelling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modelling<a class="anchor-link" href="#Modelling"> </a>
+</h2>
+<p>Data is standardized and used for Logistic Regression and Support Vector Machines.<br>
+For Naive Bayes, data is normalized.<br>
+Data is used directly for Random Forests and XGBoost as these are based on decision trees.<br>
+For all the below models, small code snippets and results are printed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Logistic-Regression">
+<a class="anchor" href="#Logistic-Regression" aria-hidden="true"><span class="octicon octicon-link"></span></a>Logistic Regression<a class="anchor-link" href="#Logistic-Regression"> </a>
+</h3>
+<p>Logistic Regression is one of the useful algorithms for Binary Classification. The assumption that is made for this algorithm is that the data is linear.<a href="https://hal.archives-ouvertes.fr/hal-01703140/document">[1]</a><a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">[2]</a><br></p>
+<p>Hyper-parameter tuning is performed for different c_range values and L2 Regularization is used.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c_range</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">c_range</span><span class="p">:</span>
+    <span class="n">LR_model</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">c</span><span class="p">,</span><span class="n">penalty</span><span class="o">=</span><span class="s1">'l2'</span><span class="p">)</span>
+    <span class="n">LR_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_standardized</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Observed that f1 score is very less with logistic regression.<br>
+For c=0.01 and with penalty='l2', we got the best test f1 score.</p>
+<ul>
+<li>train_f1_score=0.751285</li>
+<li>cv_f1_score=0.009825</li>
+<li>test_f1_score=0.009673</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Support-Vector-Machine">
+<a class="anchor" href="#Support-Vector-Machine" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support Vector Machine<a class="anchor-link" href="#Support-Vector-Machine"> </a>
+</h3>
+<p>Support Vector Machine (SVM) alogirthm relies on finding the hyperplane that splits the two classes to predict while maximizing the distance with the closest data points.<a href="https://hal.archives-ouvertes.fr/hal-01703140/document">[1]</a><a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">[2]</a><br></p>
+<p>SGDClassifier with loss='Hinge' is used and hyper-parameter tuning is performed for different ranges of alpha.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alpha_range</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alpha_range</span><span class="p">:</span>
+    <span class="n">SGD_model</span><span class="o">=</span><span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'hinge'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">SGD_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_standardized</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Observed that test f1 score is less with SVM.<br>
+For alpha=0.0001, we got the best test f1 score.</p>
+<ul>
+<li>train_f1_score=0.756617</li>
+<li>cv_f1_score=0.011170</li>
+<li>test_f1_score=0.01123</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Random-Forest-Classifier">
+<a class="anchor" href="#Random-Forest-Classifier" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Forest Classifier<a class="anchor-link" href="#Random-Forest-Classifier"> </a>
+</h3>
+<p>Random forest is an ensemble technique based on Decision Tress. It takes a subset of observations and a subset of variables to build a group of decision trees. Predictions are made based on a vote among the different decision trees. Random forest model is chosen as it is robust to noise, caused by poorly correlated SMART features.<a href="https://hal.archives-ouvertes.fr/hal-01703140/document">[1]</a><a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">[2]</a><br></p>
+<p>Hyper-parameter tuning is performed for different values of n_estimators, max_depth, learning_rate.<br>
+Probabilities are calibrated using CalibratedClassiferCV before predicting the target values.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_estimators</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span>  <span class="mi">9</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_estimators</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">max_depth</span><span class="p">:</span>
+        <span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_df_final_1</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+        <span class="n">cal_rf_model</span><span class="o">=</span><span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">'isotonic'</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="s1">'prefit'</span><span class="p">)</span>
+        <span class="n">cal_rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cv_df_final_1</span><span class="p">,</span><span class="n">cv_output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Observed that test f1 score is less with RandomForestClassifier.<br>
+For n_estiamtors=150, max_depth=9, we got the best test f1 score.</p>
+<ul>
+<li>train_f1_score=0.27872</li>
+<li>cv_f1_score=0.19057</li>
+<li>test_f1_score=0.02651</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="XGBClassifier">
+<a class="anchor" href="#XGBClassifier" aria-hidden="true"><span class="octicon octicon-link"></span></a>XGBClassifier<a class="anchor-link" href="#XGBClassifier"> </a>
+</h3>
+<p>Gradient boosted tree (GBT) is another ensemble technique based on decision trees. Training takes place in an iterative fashion with the goal of trying to minimize a loss function using a gradient descent method.<a href="https://hal.archives-ouvertes.fr/hal-01703140/document">[1]</a><a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">[2]</a><br></p>
+<p>Hyper-parameter tuning is performed for different values of n_estimators and max_depth.<br>
+Probabilities are calibrated using CalibratedClassiferCV before predicting the target values.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_estimators</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_estimators</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">max_depth</span><span class="p">:</span>
+        <span class="n">xgb_model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">j</span><span class="p">,</span><span class="n">tree_method</span><span class="o">=</span><span class="s1">'exact'</span><span class="p">)</span>
+        <span class="n">xgb_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_df_final_1</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+        <span class="n">cal_xgb_model</span><span class="o">=</span><span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">xgb_model</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">'isotonic'</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="s1">'prefit'</span><span class="p">)</span>
+        <span class="n">cal_xgb_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cv_df_final_1</span><span class="p">,</span><span class="n">cv_output</span><span class="p">)</span>
+
+<span class="n">important_features</span><span class="o">=</span><span class="n">xgb_model</span><span class="o">.</span><span class="n">get_booster</span><span class="p">()</span><span class="o">.</span><span class="n">get_score</span><span class="p">(</span><span class="n">importance_type</span><span class="o">=</span><span class="s2">"gain"</span><span class="p">)</span>
+<span class="n">important_features_sorted</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">important_features</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">index_features</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">train_df_final</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">index_features</span><span class="p">[</span><span class="s1">'f'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="n">column</span> 
+    <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+<span class="n">sorted_important_features_dict</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">important_features_sorted</span><span class="p">:</span>
+    <span class="n">key</span><span class="o">=</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sorted_important_features_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">index_features</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Top 10 important features:"</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">sorted_important_features_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://user-images.githubusercontent.com/54760460/94026129-eb41ad00-fdd6-11ea-9174-dd92c352bc9e.png" alt="image"></p>
+<p>Observed that <strong>XGBoost performed very well in predicting failed hard drives.</strong><br>
+Optimal hyper-parameters: <strong>n_estimators=1000, max_depth=9</strong></p>
+<ul>
+<li><strong>test f1_score: 0.929026</strong></li>
+<li><strong>test Precison : 0.943334</strong></li>
+<li><strong>test Recall : 0.915139</strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Naive-Bayes">
+<a class="anchor" href="#Naive-Bayes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Naive Bayes<a class="anchor-link" href="#Naive-Bayes"> </a>
+</h3>
+<p>The Naive Bayes classifier makes the assumption that the value of a feature is conditionally independent of the value of another feature given some class label. Among the different techniques used for building Naive Bayes models, we chose Multinomial Naive Bayes, which assumes that the probability of a feature value given some class
+label is sampled from a multinomial distribution. For regularization, we use Laplace smoothing.<a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">[2]</a><br></p>
+<p>Hyper-parameter tuing is performed for different ranges of alpha.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alpha_range</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alpha_range</span><span class="p">:</span>
+    <span class="n">nb_clf</span><span class="o">=</span><span class="n">MultinomialNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">fit_prior</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nb_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_normalized</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Observed that test f1 score is less with Naive Bayes.<br>
+For alpha=0.0001, we got the best test f1 score.</p>
+<ul>
+<li>train_f1_score=0.625518</li>
+<li>cv_f1_score=0.004463</li>
+<li>test_f1_score=0.004925</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="XGBClassifier-with-top-50-important-features">
+<a class="anchor" href="#XGBClassifier-with-top-50-important-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>XGBClassifier with top 50 important features<a class="anchor-link" href="#XGBClassifier-with-top-50-important-features"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_estimators</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_estimators</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">max_depth</span><span class="p">:</span>
+        <span class="n">xgb_model_imp</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">j</span><span class="p">,</span><span class="n">tree_method</span><span class="o">=</span><span class="s1">'exact'</span><span class="p">)</span>
+        <span class="n">xgb_model_imp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_df_final_imp_1</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+        <span class="n">cal_xgb_model_imp</span><span class="o">=</span><span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">xgb_model_imp</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">'isotonic'</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="s1">'prefit'</span><span class="p">)</span>
+        <span class="n">cal_xgb_model_imp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cv_df_final_imp_1</span><span class="p">,</span><span class="n">cv_output</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Observed that f1 score is good with XGBClassifier when compared with all other models.<br>
+With n_estimators=1000, max_depth=9, we got the best f1 score.</p>
+<ul>
+<li><strong>test f1_score : 0.935266</strong></li>
+<li><strong>test Precison : 0.9370764762826719</strong></li>
+<li><strong>test Recall : 0.9334619093539055</strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ensemble-of-RandomForestClassifier-and-XGBClassifier-with-top-50-important-features">
+<a class="anchor" href="#Ensemble-of-RandomForestClassifier-and-XGBClassifier-with-top-50-important-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ensemble of RandomForestClassifier and XGBClassifier with top 50 important features<a class="anchor-link" href="#Ensemble-of-RandomForestClassifier-and-XGBClassifier-with-top-50-important-features"> </a>
+</h3>
+<p>Tried ensembling with different combinations of above classifiers with different weights using EnsembleVoteClassifier.<br>
+Ensemble of RandomForestClassifer and XGBClassifier with more weight to XGBClassifier resulted in good prediction.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ensemble_vote_clf_imp</span> <span class="o">=</span> <span class="n">EnsembleVoteClassifier</span><span class="p">(</span><span class="n">clfs</span><span class="o">=</span><span class="p">[</span><span class="n">cal_rf_model_imp</span><span class="p">,</span><span class="n">cal_xgb_model_imp_new</span><span class="p">],</span> <span class="n">voting</span><span class="o">=</span><span class="s1">'soft'</span><span class="p">,</span><span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.9</span><span class="p">])</span>
+<span class="n">ensemble_vote_clf_imp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_df_final_imp_1</span><span class="p">,</span><span class="n">train_output</span><span class="p">)</span>
+<span class="n">predicted_test_failure</span><span class="o">=</span><span class="n">ensemble_vote_clf_imp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_df_final_imp_1</span><span class="p">)</span>
+<span class="n">test_f1_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">test_output</span><span class="p">,</span> <span class="n">predicted_test_failure</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"test Precison :"</span><span class="p">,</span><span class="n">precision_score</span><span class="p">(</span><span class="n">test_output</span><span class="p">,</span><span class="n">predicted_test_failure</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"test Recall :"</span><span class="p">,</span><span class="n">recall_score</span><span class="p">(</span><span class="n">test_output</span><span class="p">,</span><span class="n">predicted_test_failure</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"test_f1_score="</span><span class="p">,</span><span class="n">test_f1_scores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>test Precison : 0.9477317554240631</li>
+<li>test Recall : 0.926711668273867</li>
+<li>test_f1_score= 0.9371038517796197</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comparision-of-Different-Models">
+<a class="anchor" href="#Comparision-of-Different-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparision of Different Models<a class="anchor-link" href="#Comparision-of-Different-Models"> </a>
+</h2>
+<p><img src="https://user-images.githubusercontent.com/54760460/94027919-feee1300-fdd8-11ea-84d8-4223c5c5e127.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/54760460/94028017-1b8a4b00-fdd9-11ea-842a-8f9906409542.png" alt="image"></p>
+<p>By comparing results of above two tables, we can observe that with top 50 important features we are able to get good scores.<br> 
+We got best f1 score with XGBClassifier.<br>
+The next good model is RandomForest but it doesn't perform that well.</p>
+<p><img src="https://user-images.githubusercontent.com/54760460/94028555-8dfb2b00-fdd9-11ea-9081-34a91ec24801.png" alt="image"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Summary:">
+<a class="anchor" href="#Summary:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary:<a class="anchor-link" href="#Summary:"> </a>
+</h3>
+<ol>
+<li>From the above tables, we can observe that precision is good with random forests and xgboost but is very less with other classifiers.</li>
+<li>Recall is good with all classifiers except random forests.</li>
+<li>XGBClassifier predicted failed hard drives very well.</li>
+<li>
+<p>Precision and recall scores are highest with XGBClassifier and also with ensemble of RF and XGB.</p>
+</li>
+<li>
+<p><strong>XGB With top 50 important features:</strong></p>
+<p>Test Precison : 0.937076<br>
+ <strong>Test Recall : 0.933461 -- Best</strong><br>
+ Test f1_score: 0.935266</p>
+</li>
+<li>
+<p><strong>Ensemble of XGB and RF With top 50 important features:</strong></p>
+<p><strong>Test Precison : 0.947731 -- Best</strong><br>
+ Test Recall : 0.926711<br>
+ <strong>Test f1_score: 0.937103 -- Best</strong></p>
+</li>
+<li>
+<p>We can observe that recall score is high with XGB classifier when top 50 features are used. Whereas f1-score and precision are high with ensemble of XGB and RF with top 50 features. We can choose any of these two models. Both the models are good.</p>
+</li>
+<li>Extracted many time series features from given data like exponential averages, rolling mean, rolling standard deviation, expanding mean, expanding standard deviation, backtracked last 15 days' failures etc,.</li>
+<li>Top 10 important features for XGBClassifier are:
+ smart_188_raw_exp_avg
+ smart_5_raw
+ smart_197_raw
+ model_second_last_char_working
+ capacity_bytes
+ smart_199_raw_expanding_stdev
+ serial_second_last_char_working
+ smart_188_raw_expanding_mean
+ smart_9_raw_rolling_mean
+ smart_12_raw_rolling_stdev</li>
+<li>The above results are on SEGATE model hard drives' July and August months data. We can try with XGBoost modelling for other hard drives also.</li>
+<li>Recall is the important metric here. Our main aim to detect failed hard drives. In this case study, we have predicted hard drives that are going to fail in the next 15 days. If we can predict the drives that are going to fail few days before the failure, we can have sufficient time to retrieve data and replace them with new hard drives. It is somewhat fine if a drive predicted to be a failure is actually a working one. But the important aim here is recall: drives which are actually failures should be predicted as failures else if wrongly predicted as working ones, it may fail in future and data can't be retrieved.</li>
+<li>We got best recall score with XGBClassifier with top 50 important features: <strong>0.933461</strong>
+</li>
+<li>Limited data to arorund 5 million due to limited system capacity. Train data is around 3 millions(after upsampling around 6 million) With more amounts of data and feature engineering, we can further improve recall and f1 scores.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Future-Work">
+<a class="anchor" href="#Future-Work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future Work<a class="anchor-link" href="#Future-Work"> </a>
+</h2>
+<ol>
+<li>From the above summary, we can observe that many of the time series features are useful in predicting hard drive failures.</li>
+<li>So, we can extract and experiment with more time series features for much better results.<br> 
+ Eg: double/triple exponential smoothing, lag features, etc,.</li>
+<li>We can use more data from all quarters of an Year to improve the results.</li>
+<li>We can also experiment with deep learning techniques to predict the failures.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">
+<a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
+</h2>
+<ol>
+<li><a href="https://hal.archives-ouvertes.fr/hal-01703140/document">https://hal.archives-ouvertes.fr/hal-01703140/document</a></li>
+<li><a href="http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf">http://cs229.stanford.edu/proj2017/final-reports/5242080.pdf</a></li>
+<li><a href="https://www.kaggle.com/vishakg/predicting-hdd-failures-using-ml">https://www.kaggle.com/vishakg/predicting-hdd-failures-using-ml</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hard_disk_drive_failure">https://en.wikipedia.org/wiki/Hard_disk_drive_failure</a></li>
+<li><a href="https://www.backblaze.com/blog/backblaze-hard-drive-stats-q3-2019/">https://www.backblaze.com/blog/backblaze-hard-drive-stats-q3-2019/</a></li>
+<li><a href="https://neurospace.io/blog/2018/10/predicting-hard-drive-failure-with-machine-learning/">https://neurospace.io/blog/2018/10/predicting-hard-drive-failure-with-machine-learning/</a></li>
+<li><a href="https://vsbytes.com/hdd-vs-ssd/">https://vsbytes.com/hdd-vs-ssd/</a></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Thanks for Reading😃</strong></p>
+<p><strong>Complete code in github: <a href="https://github.com/VyshnaviVanjari/HDDFailure">https://github.com/VyshnaviVanjari/HDDFailure</a></strong></p>
+<p><strong>Reach me at Linkedin: <a href="https://www.linkedin.com/in/vyshnavi-vanjari-57345896/">https://www.linkedin.com/in/vyshnavi-vanjari-57345896/</a></strong></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="VyshnaviVanjari/ML-DL-Blogs"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/ML-DL-Blogs/machine%20learning/2020/10/31/Hard-Drive-Failure-Prediction.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/ML-DL-Blogs/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/ML-DL-Blogs/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/ML-DL-Blogs/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
